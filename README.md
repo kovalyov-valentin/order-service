@@ -2,11 +2,11 @@
 
 # Запуск контейнеров с nats-streaming и PostgreSQL:
 ```
-docker-compose up -d
+make compose
 ```
 # Создание таблицы в поднятой в Docker БД:
 ```
-migrate -path internal/db/migration -database 'postgres://wb:password@localhost:5040/orderdb?sslmode=disable' up
+make upmigrate
 ```
 # Запуск сервера:
 ```
@@ -18,5 +18,5 @@ go run cmd/publisher/publisher.go
 ```
 # Остановка контейнеров:
 ```
-docker stop orders-service && docker stop nats-stream
+make stop
 ```
