@@ -4,28 +4,28 @@
 Реализация сервиса для сохранения orders(заказов) из NATS-streaming в PostgreSQL. 
 
 # Как поднять:
-<ol>
-<li>## Запуск контейнеров с nats-streaming и PostgreSQL:
+
+## 1. Запуск контейнеров с nats-streaming и PostgreSQL:
 ```
 make compose
 ```
-<li>## Создание таблицы в поднятой в Docker БД:
+## 2. Создание таблицы в поднятой в Docker БД:
 ```
 make upmigrate
 ```
-<li>## Запуск сервера:
+## 3. Запуск сервера:
 ```
 go run cmd/main.go
 ```
-<li>## Автоматическая публикация данных:
+## 4. Автоматическая публикация данных:
 ```
 go run cmd/publisher/publisher.go
 ```
-<li>## Остановка контейнеров:
+## 5. Остановка контейнеров:
 ```
 make stop
 ```
-</ol>
+
 ## Стек технологий проекта:
 * GO
 * NATS-streaming
