@@ -36,3 +36,5 @@ make stop
 * HTML
 * CSS
 * Javascript
+## Осталось доделать:
+* Тесты!
