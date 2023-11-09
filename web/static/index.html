@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дикие Ягодки</title>
+    <style>
+        .data {
+            color: rgb(57, 7, 103);
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 150vh; 
+        }
+
+        html, body {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 15px;
+            margin: 0;
+            padding: 0;
+            color: rgb(57, 7, 103);
+        }
+
+        .search-btn {
+            display: inline-block;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+            top: 20px;
+            font-weight: 700;
+            border-radius: 3px;
+            padding: 0 15px;
+            border-radius: 4px;
+            color: rgb(57, 7, 103);
+            background: transparent;
+            line-height: 1.15;
+            font-size: 14px;
+            height: 36px;
+            word-spacing: 0px;
+            letter-spacing: .0892857143em;
+            text-decoration: none;
+            text-transform: uppercase;
+            min-width: 64px;
+            border: 1px solid rgb(57, 7, 103);
+            text-align: center;
+        }
+
+        .search-btn:hover {
+            background: #f4f4f4;
+            box-shadow: none;
+            position: relative;
+        }
+
+        .search-field {
+            width: 250px;
+            height: 36px;
+            border-radius: 4px;
+            padding-left: 12px;
+            font-size: 15x;
+            font-weight: normal;
+            border: 1px solid rgb(137, 151, 155);
+            transition: border-color 150ms ease-in-out 0s;
+            outline: none;
+            color: rgb(33, 49, 60);
+            background-color: rgb(255, 255, 255);
+            padding-right: 12px;
+        }
+
+        label {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 20px;
+            font-weight: bold;
+            color: rgb(57, 7, 103);
+        }
+
+        .info {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', Verdana, sans-serif;
+            font-size: 25px;
+            color: rgb(57, 7, 103);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 5vh;
+        }
+        .form-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 50vh; 
+      }
+      
+    </style>
+</head>
+<body>
+    <form class="form-wrapper" id="input">
+        <h1 class="info">Введите id заказа:</h1>
+        <label>
+            <input type="text" class="search-field" name="orderuid" id="uid">
+        </label>
+        <button type="submit" class="search-btn">Найти</button>
+    </form>
+
+    <h1 class="info">Информация о заказе:</h1>
+    <div class="data" id="data"></div>
+    <script>
+        document.getElementById("input").addEventListener("submit", async e => {
+            e.preventDefault()
+
+            const data = new FormData(e.target)
+            const value = Object.fromEntries(data.entries())
+
+            const answer = await fetch(`/orders/${value.orderuid}`, {
+                method: "GET",
+            })
+                .then(res => res.json())
+                .then(body => JSON.stringify(body, null, 2))
+
+            document.getElementById("data").innerText = answer
+        })
+    </script>
+</body>
+</html>
